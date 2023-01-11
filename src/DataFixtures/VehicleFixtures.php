@@ -11,11 +11,15 @@ use Faker\Factory;
 class VehicleFixtures extends Fixture implements DependentFixtureInterface
 {
     public const STATUS = ['available', 'retired', 'used', 'repair'];
+
+    public static int $vehicleIndex = 0;
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
         for ($i = 1; $i <= EnterpriseFixtures::$enterpriseIndex; $i++) {
             for ($j = 1; $j <= 10; $j++) {
+                self::$vehicleIndex++;
                 $vehicle = new Vehicle();
                 $vehicle->setBrand('Constructeur' . $faker->numberBetween(1,5));
                 $vehicle->setModel('Model' . $faker->numberBetween(1,5));
@@ -26,6 +30,7 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
                 $vehicle->setEnterprise($this->getReference('enterprise_' . $i));
                 $vehicle->setColor($faker->colorName);
                 $manager->persist($vehicle);
+                $this->addReference('vehicle_' . self::$vehicleIndex, $vehicle);
             }
         }
 
