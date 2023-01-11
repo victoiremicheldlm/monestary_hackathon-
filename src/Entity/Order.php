@@ -28,6 +28,15 @@ class Order
     #[ORM\Column(type: 'boolean')]
     private $delivery_isneeded;
 
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'orders')]
+    private $customer;
+
+    #[ORM\ManyToOne(targetEntity: Schedule::class, inversedBy: 'orders')]
+    private $schedule;
+
+    #[ORM\ManyToOne(targetEntity: Driver::class, inversedBy: 'orders')]
+    private $driver;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +86,42 @@ class Order
     public function setDeliveryIsneeded(bool $delivery_isneeded): self
     {
         $this->delivery_isneeded = $delivery_isneeded;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getSchedule(): ?Schedule
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?Schedule $schedule): self
+    {
+        $this->schedule = $schedule;
+
+        return $this;
+    }
+
+    public function getDriver(): ?Driver
+    {
+        return $this->driver;
+    }
+
+    public function setDriver(?Driver $driver): self
+    {
+        $this->driver = $driver;
 
         return $this;
     }

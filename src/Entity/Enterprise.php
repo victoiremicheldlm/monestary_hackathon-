@@ -41,8 +41,15 @@ class Enterprise
     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'enterprises')]
     private $customers;
 
+    #[ORM\OneToOne(inversedBy: 'enterprise', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
+    #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: Vehicule::class)]
+    private $vehicules;
+
     public function __construct()
     {
+        $this->vehicules = new ArrayCollection();
         $this->customers = new ArrayCollection();
     }
 
@@ -157,6 +164,48 @@ class Enterprise
     {
         if ($this->customers->removeElement($customer)) {
             $customer->removeEnterprise($this);
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vehicule>
+     */
+    public function getVehicules(): Collection
+    {
+        return $this->vehicules;
+    }
+
+    public function addVehicule(Vehicule $vehicule): self
+    {
+        if (!$this->vehicules->contains($vehicule)) {
+            $this->vehicules[] = $vehicule;
+            $vehicule->setEnterprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVehicule(Vehicule $vehicule): self
+    {
+        if ($this->vehicules->removeElement($vehicule)) {
+            // set the owning side to null (unless already changed)
+            if ($vehicule->getEnterprise() === $this) {
+                $vehicule->setEnterprise(null);
+            }
         }
 
         return $this;
