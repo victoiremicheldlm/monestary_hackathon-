@@ -51,6 +51,12 @@ class Vehicule
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $status;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $numberplate;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $color;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -196,6 +202,30 @@ class Vehicule
     public function setStatus(?string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getNumberplate(): ?string
+    {
+        return $this->numberplate;
+    }
+
+    public function setNumberplate(?string $numberplate): self
+    {
+        $this->numberplate = $numberplate;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
