@@ -18,6 +18,12 @@ class Cart
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $is_active;
 
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'carts')]
+    private $customer;
+
+    #[ORM\ManyToOne(targetEntity: Vehicule::class, inversedBy: 'carts')]
+    private $vehicule;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,6 +37,30 @@ class Cart
     public function setIsActive(?bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getVehicule(): ?Vehicule
+    {
+        return $this->vehicule;
+    }
+
+    public function setVehicule(?Vehicule $vehicule): self
+    {
+        $this->vehicule = $vehicule;
 
         return $this;
     }

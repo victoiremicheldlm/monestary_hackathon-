@@ -21,6 +21,12 @@ class CommentVehicule
     #[ORM\Column(type: 'integer', nullable: true)]
     private $rating;
 
+    #[ORM\ManyToOne(targetEntity: Vehicule::class, inversedBy: 'commentVehicules')]
+    private $vehicule;
+
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'commentVehicules')]
+    private $customer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +52,30 @@ class CommentVehicule
     public function setRating(?int $rating): self
     {
         $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getVehicule(): ?Vehicule
+    {
+        return $this->vehicule;
+    }
+
+    public function setVehicule(?Vehicule $vehicule): self
+    {
+        $this->vehicule = $vehicule;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

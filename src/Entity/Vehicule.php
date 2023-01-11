@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\VehiculeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
@@ -56,6 +58,25 @@ class Vehicule
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $color;
+
+    #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'vehicules')]
+    private $enterprise;
+
+    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: Schedule::class)]
+    private $schedules;
+
+    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: Cart::class)]
+    private $carts;
+
+    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: CommentVehicule::class)]
+    private $commentVehicules;
+
+    public function __construct()
+    {
+        $this->schedules = new ArrayCollection();
+        $this->carts = new ArrayCollection();
+        $this->commentVehicules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -226,6 +247,108 @@ class Vehicule
     public function setColor(?string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getEnterprise(): ?Enterprise
+    {
+        return $this->enterprise;
+    }
+
+    public function setEnterprise(?Enterprise $enterprise): self
+    {
+        $this->enterprise = $enterprise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Schedule>
+     */
+    public function getSchedules(): Collection
+    {
+        return $this->schedules;
+    }
+
+    public function addSchedule(Schedule $schedule): self
+    {
+        if (!$this->schedules->contains($schedule)) {
+            $this->schedules[] = $schedule;
+            $schedule->setVehicule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSchedule(Schedule $schedule): self
+    {
+        if ($this->schedules->removeElement($schedule)) {
+            // set the owning side to null (unless already changed)
+            if ($schedule->getVehicule() === $this) {
+                $schedule->setVehicule(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setVehicule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getVehicule() === $this) {
+                $cart->setVehicule(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentVehicule>
+     */
+    public function getCommentVehicules(): Collection
+    {
+        return $this->commentVehicules;
+    }
+
+    public function addCommentVehicule(CommentVehicule $commentVehicule): self
+    {
+        if (!$this->commentVehicules->contains($commentVehicule)) {
+            $this->commentVehicules[] = $commentVehicule;
+            $commentVehicule->setVehicule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentVehicule(CommentVehicule $commentVehicule): self
+    {
+        if ($this->commentVehicules->removeElement($commentVehicule)) {
+            // set the owning side to null (unless already changed)
+            if ($commentVehicule->getVehicule() === $this) {
+                $commentVehicule->setVehicule(null);
+            }
+        }
 
         return $this;
     }
