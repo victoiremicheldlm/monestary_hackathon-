@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CustomerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
@@ -38,6 +40,20 @@ class Customer
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
+
+    #[ORM\ManyToMany(targetEntity: Enterprise::class, inversedBy: 'customers')]
+    #[ORM\JoinTable(name:'favorite_enterprises')]
+    private $enterprises;
+
+    #[ORM\ManyToMany(targetEntity: Vehicule::class, inversedBy: 'customers')]
+    #[ORM\JoinTable(name:'favorite_vehicules')]
+    private $vehicules;
+
+    public function __construct()
+    {
+        $this->enterprises = new ArrayCollection();
+        $this->vehicules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +152,54 @@ class Customer
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Enterprise>
+     */
+    public function getEnterprises(): Collection
+    {
+        return $this->enterprises;
+    }
+
+    public function addEnterprise(Enterprise $enterprise): self
+    {
+        if (!$this->enterprises->contains($enterprise)) {
+            $this->enterprises[] = $enterprise;
+        }
+
+        return $this;
+    }
+
+    public function removeEnterprise(Enterprise $enterprise): self
+    {
+        $this->enterprises->removeElement($enterprise);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vehicule>
+     */
+    public function getVehicules(): Collection
+    {
+        return $this->vehicules;
+    }
+
+    public function addVehicule(Vehicule $vehicule): self
+    {
+        if (!$this->vehicules->contains($vehicule)) {
+            $this->vehicules[] = $vehicule;
+        }
+
+        return $this;
+    }
+
+    public function removeVehicule(Vehicule $vehicule): self
+    {
+        $this->vehicules->removeElement($vehicule);
 
         return $this;
     }
