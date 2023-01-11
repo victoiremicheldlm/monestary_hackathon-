@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\CommentVehicule;
+use App\Entity\CommentVehicle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CommentVehicule>
+ * @extends ServiceEntityRepository<CommentVehicle>
  *
- * @method CommentVehicule|null find($id, $lockMode = null, $lockVersion = null)
- * @method CommentVehicule|null findOneBy(array $criteria, array $orderBy = null)
- * @method CommentVehicule[]    findAll()
- * @method CommentVehicule[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CommentVehicle|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CommentVehicle|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CommentVehicle[]    findAll()
+ * @method CommentVehicle[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CommentVehiculeRepository extends ServiceEntityRepository
+class CommentVehicleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CommentVehicule::class);
+        parent::__construct($registry, CommentVehicle::class);
     }
 
-    public function add(CommentVehicule $entity, bool $flush = false): void
+    public function add(CommentVehicle $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CommentVehiculeRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(CommentVehicule $entity, bool $flush = false): void
+    public function remove(CommentVehicle $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CommentVehiculeRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return CommentVehicule[] Returns an array of CommentVehicule objects
+//     * @return CommentVehicle[] Returns an array of CommentVehicle objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CommentVehiculeRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CommentVehicule
+//    public function findOneBySomeField($value): ?CommentVehicle
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\VehiculeRepository;
+use App\Repository\VehicleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VehiculeRepository::class)]
+#[ORM\Entity(repositoryClass: VehicleRepository::class)]
 #[ApiResource]
-class Vehicule
+class Vehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -59,26 +59,26 @@ class Vehicule
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $color;
 
-    #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'vehicules')]
+    #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'vehicles')]
     private $customers;
 
-    #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'vehicules')]
+    #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'vehicles')]
     private $enterprise;
 
-    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: Schedule::class)]
+    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Schedule::class)]
     private $schedules;
 
-    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: Cart::class)]
+    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Cart::class)]
     private $carts;
 
-    #[ORM\OneToMany(mappedBy: 'vehicule', targetEntity: CommentVehicule::class)]
-    private $commentVehicules;
+    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: CommentVehicle::class)]
+    private $commentVehicles;
 
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
         $this->carts = new ArrayCollection();
-        $this->commentVehicules = new ArrayCollection();
+        $this->commentVehicles = new ArrayCollection();
         $this->customers = new ArrayCollection();
     }
 
@@ -267,7 +267,7 @@ class Vehicule
     {
         if (!$this->customers->contains($customer)) {
             $this->customers[] = $customer;
-            $customer->addVehicule($this);
+            $customer->addVehicle($this);
         }
 
         return $this;
@@ -276,7 +276,7 @@ class Vehicule
     public function removeCustomer(Customer $customer): self
     {
         if ($this->customers->removeElement($customer)) {
-            $customer->removeVehicule($this);
+            $customer->removeVehicle($this);
         }
 
         return $this;
@@ -306,7 +306,7 @@ class Vehicule
     {
         if (!$this->schedules->contains($schedule)) {
             $this->schedules[] = $schedule;
-            $schedule->setVehicule($this);
+            $schedule->setVehicle($this);
         }
 
         return $this;
@@ -316,8 +316,8 @@ class Vehicule
     {
         if ($this->schedules->removeElement($schedule)) {
             // set the owning side to null (unless already changed)
-            if ($schedule->getVehicule() === $this) {
-                $schedule->setVehicule(null);
+            if ($schedule->getVehicle() === $this) {
+                $schedule->setVehicle(null);
             }
         }
 
@@ -336,7 +336,7 @@ class Vehicule
     {
         if (!$this->carts->contains($cart)) {
             $this->carts[] = $cart;
-            $cart->setVehicule($this);
+            $cart->setVehicle($this);
         }
 
         return $this;
@@ -346,8 +346,8 @@ class Vehicule
     {
         if ($this->carts->removeElement($cart)) {
             // set the owning side to null (unless already changed)
-            if ($cart->getVehicule() === $this) {
-                $cart->setVehicule(null);
+            if ($cart->getVehicle() === $this) {
+                $cart->setVehicle(null);
             }
         }
 
@@ -355,29 +355,29 @@ class Vehicule
     }
 
     /**
-     * @return Collection<int, CommentVehicule>
+     * @return Collection<int, CommentVehicle>
      */
-    public function getCommentVehicules(): Collection
+    public function getCommentVehicles(): Collection
     {
-        return $this->commentVehicules;
+        return $this->commentVehicles;
     }
 
-    public function addCommentVehicule(CommentVehicule $commentVehicule): self
+    public function addCommentVehicle(CommentVehicle $commentVehicle): self
     {
-        if (!$this->commentVehicules->contains($commentVehicule)) {
-            $this->commentVehicules[] = $commentVehicule;
-            $commentVehicule->setVehicule($this);
+        if (!$this->commentVehicles->contains($commentVehicle)) {
+            $this->commentVehicles[] = $commentVehicle;
+            $commentVehicle->setVehicle($this);
         }
 
         return $this;
     }
 
-    public function removeCommentVehicule(CommentVehicule $commentVehicule): self
+    public function removeCommentVehicle(CommentVehicle $commentVehicle): self
     {
-        if ($this->commentVehicules->removeElement($commentVehicule)) {
+        if ($this->commentVehicles->removeElement($commentVehicle)) {
             // set the owning side to null (unless already changed)
-            if ($commentVehicule->getVehicule() === $this) {
-                $commentVehicule->setVehicule(null);
+            if ($commentVehicle->getVehicle() === $this) {
+                $commentVehicle->setVehicle(null);
             }
         }
 

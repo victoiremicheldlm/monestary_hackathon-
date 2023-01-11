@@ -45,9 +45,9 @@ class Customer
     #[ORM\JoinTable(name:'favorite_enterprises')]
     private $enterprises;
 
-    #[ORM\ManyToMany(targetEntity: Vehicule::class, inversedBy: 'customers')]
-    #[ORM\JoinTable(name:'favorite_vehicules')]
-    private $vehicules;
+    #[ORM\ManyToMany(targetEntity: Vehicle::class, inversedBy: 'customers')]
+    #[ORM\JoinTable(name:'favorite_vehicles')]
+    private $vehicles;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Order::class)]
     private $orders;
@@ -55,8 +55,8 @@ class Customer
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Cart::class)]
     private $carts;
 
-    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: CommentVehicule::class)]
-    private $commentVehicules;
+    #[ORM\OneToMany(mappedBy: 'customer', targetEntity: CommentVehicle::class)]
+    private $commentVehicles;
 
     #[ORM\OneToOne(inversedBy: 'customer', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
@@ -68,10 +68,10 @@ class Customer
     {
         $this->orders = new ArrayCollection();
         $this->carts = new ArrayCollection();
-        $this->commentVehicules = new ArrayCollection();
+        $this->commentVehicles = new ArrayCollection();
         $this->commentEnterprises = new ArrayCollection();
         $this->enterprises = new ArrayCollection();
-        $this->vehicules = new ArrayCollection();
+        $this->vehicles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,25 +200,25 @@ class Customer
     }
 
     /**
-     * @return Collection<int, Vehicule>
+     * @return Collection<int, Vehicle>
      */
-    public function getVehicules(): Collection
+    public function getVehicles(): Collection
     {
-        return $this->vehicules;
+        return $this->vehicles;
     }
 
-    public function addVehicule(Vehicule $vehicule): self
+    public function addVehicle(Vehicle $vehicle): self
     {
-        if (!$this->vehicules->contains($vehicule)) {
-            $this->vehicules[] = $vehicule;
+        if (!$this->vehicles->contains($vehicle)) {
+            $this->vehicles[] = $vehicle;
         }
 
         return $this;
     }
 
-    public function removeVehicule(Vehicule $vehicule): self
+    public function removeVehicle(Vehicle $vehicle): self
     {
-        $this->vehicules->removeElement($vehicule);
+        $this->vehicles->removeElement($vehicle);
 
         return $this;
     }
@@ -284,29 +284,29 @@ class Customer
     }
 
     /**
-     * @return Collection<int, CommentVehicule>
+     * @return Collection<int, CommentVehicle>
      */
-    public function getCommentVehicules(): Collection
+    public function getCommentVehicles(): Collection
     {
-        return $this->commentVehicules;
+        return $this->commentVehicles;
     }
 
-    public function addCommentVehicule(CommentVehicule $commentVehicule): self
+    public function addCommentVehicle(CommentVehicle $commentVehicle): self
     {
-        if (!$this->commentVehicules->contains($commentVehicule)) {
-            $this->commentVehicules[] = $commentVehicule;
-            $commentVehicule->setCustomer($this);
+        if (!$this->commentVehicles->contains($commentVehicle)) {
+            $this->commentVehicles[] = $commentVehicle;
+            $commentVehicle->setCustomer($this);
         }
 
         return $this;
     }
 
-    public function removeCommentVehicule(CommentVehicule $commentVehicule): self
+    public function removeCommentVehicle(CommentVehicle $commentVehicle): self
     {
-        if ($this->commentVehicules->removeElement($commentVehicule)) {
+        if ($this->commentVehicles->removeElement($commentVehicle)) {
             // set the owning side to null (unless already changed)
-            if ($commentVehicule->getCustomer() === $this) {
-                $commentVehicule->setCustomer(null);
+            if ($commentVehicle->getCustomer() === $this) {
+                $commentVehicle->setCustomer(null);
             }
         }
 

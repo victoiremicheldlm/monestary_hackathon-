@@ -21,8 +21,8 @@ class Cart
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'carts')]
     private $customer;
 
-    #[ORM\ManyToOne(targetEntity: Vehicule::class, inversedBy: 'carts')]
-    private $vehicule;
+    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'carts')]
+    private $vehicle;
 
     public function getId(): ?int
     {
@@ -53,14 +53,14 @@ class Cart
         return $this;
     }
 
-    public function getVehicule(): ?Vehicule
+    public function getVehicle(): ?Vehicle
     {
-        return $this->vehicule;
+        return $this->vehicle;
     }
 
-    public function setVehicule(?Vehicule $vehicule): self
+    public function setVehicle(?Vehicle $vehicle): self
     {
-        $this->vehicule = $vehicule;
+        $this->vehicle = $vehicle;
 
         return $this;
     }

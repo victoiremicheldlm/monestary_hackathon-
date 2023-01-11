@@ -44,15 +44,15 @@ class Enterprise
     #[ORM\OneToOne(inversedBy: 'enterprise', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
-    #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: Vehicule::class)]
-    private $vehicules;
+    #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: Vehicle::class)]
+    private $vehicles;
 
     #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: CommentEnterprise::class)]
     private $commentEnterprises;
 
     public function __construct()
     {
-        $this->vehicules = new ArrayCollection();
+        $this->vehicles = new ArrayCollection();
         $this->customers = new ArrayCollection();
         $this->commentEnterprises = new ArrayCollection();
     }
@@ -186,29 +186,29 @@ class Enterprise
     }
 
     /**
-     * @return Collection<int, Vehicule>
+     * @return Collection<int, Vehicle>
      */
-    public function getVehicules(): Collection
+    public function getVehicles(): Collection
     {
-        return $this->vehicules;
+        return $this->vehicles;
     }
 
-    public function addVehicule(Vehicule $vehicule): self
+    public function addVehicle(Vehicle $vehicle): self
     {
-        if (!$this->vehicules->contains($vehicule)) {
-            $this->vehicules[] = $vehicule;
-            $vehicule->setEnterprise($this);
+        if (!$this->vehicles->contains($vehicle)) {
+            $this->vehicles[] = $vehicle;
+            $vehicle->setEnterprise($this);
         }
 
         return $this;
     }
 
-    public function removeVehicule(Vehicule $vehicule): self
+    public function removeVehicle(Vehicle $vehicle): self
     {
-        if ($this->vehicules->removeElement($vehicule)) {
+        if ($this->vehicles->removeElement($vehicle)) {
             // set the owning side to null (unless already changed)
-            if ($vehicule->getEnterprise() === $this) {
-                $vehicule->setEnterprise(null);
+            if ($vehicle->getEnterprise() === $this) {
+                $vehicle->setEnterprise(null);
             }
         }
 
