@@ -24,6 +24,9 @@ class CommentEnterprise
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'commentEnterprises')]
     private $customer;
 
+    #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'commentEnterprises')]
+    private $enterprise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class CommentEnterprise
     public function setCustomer(?Customer $customer): self
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getEnterprise(): ?Enterprise
+    {
+        return $this->enterprise;
+    }
+
+    public function setEnterprise(?Enterprise $enterprise): self
+    {
+        $this->enterprise = $enterprise;
 
         return $this;
     }

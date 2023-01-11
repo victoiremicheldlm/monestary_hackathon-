@@ -47,10 +47,14 @@ class Enterprise
     #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: Vehicule::class)]
     private $vehicules;
 
+    #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: CommentEnterprise::class)]
+    private $commentEnterprises;
+
     public function __construct()
     {
         $this->vehicules = new ArrayCollection();
         $this->customers = new ArrayCollection();
+        $this->commentEnterprises = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,6 +209,36 @@ class Enterprise
             // set the owning side to null (unless already changed)
             if ($vehicule->getEnterprise() === $this) {
                 $vehicule->setEnterprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommentEnterprise>
+     */
+    public function getCommentEnterprises(): Collection
+    {
+        return $this->commentEnterprises;
+    }
+
+    public function addCommentEnterprise(CommentEnterprise $commentEnterprise): self
+    {
+        if (!$this->commentEnterprises->contains($commentEnterprise)) {
+            $this->commentEnterprises[] = $commentEnterprise;
+            $commentEnterprise->setEnterprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentEnterprise(CommentEnterprise $commentEnterprise): self
+    {
+        if ($this->commentEnterprises->removeElement($commentEnterprise)) {
+            // set the owning side to null (unless already changed)
+            if ($commentEnterprise->getEnterprise() === $this) {
+                $commentEnterprise->setEnterprise(null);
             }
         }
 
