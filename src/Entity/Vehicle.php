@@ -7,20 +7,27 @@ use App\Repository\VehicleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['vehicle']]
+)]
 class Vehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['enterprise', 'user'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['enterprise', 'user','customer'])]
     private $model;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['enterprise', 'user','customer'])]
     private $brand;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

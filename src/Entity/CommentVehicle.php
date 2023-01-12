@@ -7,7 +7,9 @@ use App\Repository\CommentVehicleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentVehicleRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json']
+)]
 class CommentVehicle
 {
     #[ORM\Id]

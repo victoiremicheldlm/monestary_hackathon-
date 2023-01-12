@@ -7,46 +7,61 @@ use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['customer']]
+)]
 class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $phone;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $avatar;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $zipCode;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $country;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['customer', 'user'])]
     private $description;
 
     #[ORM\ManyToMany(targetEntity: Enterprise::class, inversedBy: 'customers')]
     #[ORM\JoinTable(name:'favorite_enterprises')]
+    #[Groups(['customer', 'user'])]
     private $enterprises;
 
     #[ORM\ManyToMany(targetEntity: Vehicle::class, inversedBy: 'customers')]
     #[ORM\JoinTable(name:'favorite_vehicles')]
+    #[Groups(['customer', 'user'])]
     private $vehicles;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Order::class)]
@@ -59,6 +74,7 @@ class Customer
     private $commentVehicles;
 
     #[ORM\OneToOne(inversedBy: 'customer', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[Groups('customer')]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: CommentEnterprise::class)]

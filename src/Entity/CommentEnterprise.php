@@ -5,26 +5,35 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentEnterpriseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentEnterpriseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['commentEnterprise']]
+)]
 class CommentEnterprise
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['enterprise', 'commentEnterprise'])]
     private $id;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['enterprise', 'commentEnterprise'])]
     private $content;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['enterprise', 'commentEnterprise'])]
     private $rating;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'commentEnterprises')]
+    #[Groups(['enterprise', 'commentEnterprise'])]
     private $customer;
 
     #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'commentEnterprises')]
+    #[Groups(['commentEnterprise'])]
     private $enterprise;
 
     public function getId(): ?int

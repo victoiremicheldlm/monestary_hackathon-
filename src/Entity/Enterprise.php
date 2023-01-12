@@ -7,47 +7,62 @@ use App\Repository\EnterpriseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EnterpriseRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['enterprise']]
+)]
 class Enterprise
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $logo;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $phone;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $zipCode;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $country;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['customer', 'user', 'enterprise'])]
     private $description;
 
     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'enterprises')]
     private $customers;
 
     #[ORM\OneToOne(inversedBy: 'enterprise', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[Groups('enterprise')]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: Vehicle::class)]
+    #[Groups('enterprise')]
     private $vehicles;
 
     #[ORM\OneToMany(mappedBy: 'enterprise', targetEntity: CommentEnterprise::class)]
+    #[Groups('enterprise')]
     private $commentEnterprises;
 
     public function __construct()
