@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ScheduleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ScheduleRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ScheduleRepository::class)]
 #[ApiResource(
@@ -19,11 +20,11 @@ class Schedule
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $start_at;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTime $start_at;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $end_at;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTime $end_at;
 
     #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'schedules')]
     private $vehicle;
@@ -41,24 +42,24 @@ class Schedule
         return $this->id;
     }
 
-    public function getStartAt(): ?\DateTimeImmutable
+    public function getStartAt(): ?DateTime
     {
         return $this->start_at;
     }
 
-    public function setStartAt(?\DateTimeImmutable $start_at): self
+    public function setStartAt(?DateTime $start_at): self
     {
         $this->start_at = $start_at;
 
         return $this;
     }
 
-    public function getEndAt(): ?\DateTimeImmutable
+    public function getEndAt(): ?DateTime
     {
         return $this->end_at;
     }
 
-    public function setEndAt(?\DateTimeImmutable $end_at): self
+    public function setEndAt(?DateTime $end_at): self
     {
         $this->end_at = $end_at;
 
