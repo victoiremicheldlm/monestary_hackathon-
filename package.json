@@ -24,6 +24,7 @@
     "@babel/plugin-syntax-jsx": "^7.17.12",
     "@babel/plugin-transform-runtime": "^7.18.5",
     "dotenv": "^16.0.1",
+    "react-burger-menu": "^3.0.9",
     "react-router-dom": "^6.3.0"
   }
 }
