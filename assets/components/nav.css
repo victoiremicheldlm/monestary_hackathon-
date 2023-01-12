@@ -1,0 +1,15 @@
+.bg-nav {
+    background-color:#ffa93c;
+    padding: 20px;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+  }
+
+.txt-nav {
+    font-family: 'Almarai', sans-serif;
+    font-size: 20px;
+    color: white;;
+}
