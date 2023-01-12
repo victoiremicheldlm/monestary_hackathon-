@@ -19,15 +19,15 @@ class Customer
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['customer', 'user', 'enterprise'])]
+    #[Groups(['customer', 'user', 'enterprise', 'vehicle'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    #[Groups(['customer', 'user', 'enterprise'])]
+    #[Groups(['customer', 'user', 'enterprise', 'vehicle'])]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
-    #[Groups(['customer', 'user', 'enterprise'])]
+    #[Groups(['customer', 'user', 'enterprise', 'vehicle'])]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
@@ -35,7 +35,7 @@ class Customer
     private $phone;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['customer', 'user'])]
+    #[Groups(['customer', 'user', 'vehicle'])]
     private $avatar;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -74,7 +74,6 @@ class Customer
     private $commentVehicles;
 
     #[ORM\OneToOne(inversedBy: 'customer', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[Groups('customer')]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: CommentEnterprise::class)]

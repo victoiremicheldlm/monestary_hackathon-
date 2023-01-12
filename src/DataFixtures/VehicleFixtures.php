@@ -45,8 +45,9 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
             $vehicle->setLoadCapacity($vehicleDetail['load_capacity']);
             $vehicle->setDescription($faker->paragraph(1, true));
             $vehicle->setPassenger($vehicleDetail['passenger']);
-            $vehicle->setLocation($vehicleDetail['location']);
             $vehicle->setStatus($vehicleDetail['status']);
+            $vehicle->setLatitude($faker->randomFloat(14, 44.43625239257324, 45.18008610430471));
+            $vehicle->setLongitude($faker->randomFloat(14, -1.05638974610781, 0.76567321564456));
             $vehicle->setMilage($vehicleDetail['milage']);
             $vehicle->setPrice($vehicleDetail['price']);
             $vehicle->setEnterprise($this->getReference('enterprise_' . $faker->numberBetween(1, EnterpriseFixtures::$enterpriseIndex)));
@@ -76,6 +77,8 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
                 $vehicle->setMilage($faker->numberBetween(1000,100000));
                 $vehicle->setStatus(self::STATUS[array_rand(self::STATUS)]);
                 $vehicle->setEnterprise($this->getReference('enterprise_' . $i));
+                $vehicle->setLatitude($faker->randomFloat(14, 44.43625239257324, 45.18008610430471));
+                $vehicle->setLongitude($faker->randomFloat(14, -1.05638974610781, 0.76567321564456));
                 $vehicle->setColor($faker->colorName);
                 $manager->persist($vehicle);
                 $this->addReference('vehicle_' . self::$vehicleIndex, $vehicle);
