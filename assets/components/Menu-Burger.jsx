@@ -11,16 +11,16 @@ function Menu_Burger() {
     <div className="menuBurger">
     <Menu>
       <a className="menu-item" href="/">
-        🖱️ - Home 
+        🏠 - Home 
       </a>
       <a className="menu-item" href="/AProposDeMoi">
-       👨‍💻 - Car Market
+       🖱️ - Réservation
       </a>
       <a className="menu-item" href="/MesProjets">
-       🚀 - 
+       🚩 - Help
       </a>
       <a className="menu-item" href="/MeContacter">
-       📠 - xxxxxxxx
+     ⚙️ - Profile
       </a>
     </Menu>
     </div>
@@ -29,12 +29,6 @@ function Menu_Burger() {
   );
 }
   
-
- 
-
-
-
-
 export default Menu_Burger;
 
 

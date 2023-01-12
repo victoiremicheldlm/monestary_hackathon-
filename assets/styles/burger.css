@@ -22,6 +22,7 @@
   margin-bottom: 10px;
   color: black;
   transition: color 0.2s;
+  margin-top: 20px;
 }
 
 .bm-item:hover {
@@ -54,7 +55,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: gray;
+  background: gainsboro;
   padding: 2.5em 1.5em 0;
   font-size: 1.5em;
 }
