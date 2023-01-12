@@ -74,6 +74,9 @@ class Vehicle
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: CommentVehicle::class)]
     private $commentVehicles;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $generalState;
+
     public function __construct()
     {
         $this->schedules = new ArrayCollection();
@@ -380,6 +383,18 @@ class Vehicle
                 $commentVehicle->setVehicle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGeneralState(): ?string
+    {
+        return $this->generalState;
+    }
+
+    public function setGeneralState(?string $generalState): self
+    {
+        $this->generalState = $generalState;
 
         return $this;
     }
