@@ -7,7 +7,9 @@ use App\Repository\TicketRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json']
+)]
 class Ticket
 {
     #[ORM\Id]

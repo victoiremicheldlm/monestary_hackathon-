@@ -32,6 +32,11 @@ class CustomerFixtures extends Fixture implements DependentFixtureInterface
                 $customer->addEnterprise($this->getReference('enterprise_' . $faker->unique()->numberBetween(1, EnterpriseFixtures::$enterpriseIndex)));
             }
             $faker->unique(true);
+            $number = rand(1,5);
+            for ($k = 1; $k <= $number; $k++) {
+                $customer->addVehicle($this->getReference('vehicle_' . $faker->unique()->numberBetween(1, VehicleFixtures::$vehicleIndex)));
+            }
+            $faker->unique(true);
             $manager->persist($customer);
             $this->addReference('customer_' . self::$customerIndex, $customer);
         }
@@ -44,6 +49,7 @@ class CustomerFixtures extends Fixture implements DependentFixtureInterface
         return [
             UserFixtures::class,
             EnterpriseFixtures::class,
+            VehicleFixtures::class,
         ];
     }
 }

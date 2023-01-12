@@ -15,6 +15,8 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
 {
     public static int $vehicleIndex = 0;
 
+    public const STATUS = ['available', 'retired', 'on location', 'on repair'];
+
     public function __construct(
         private readonly ContainerBagInterface $containerBag,
         private readonly DecoderInterface $decoder
@@ -23,7 +25,7 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        $faker = Factory::create('fr_FR');
         $file = 'vehicle_detail.csv';
         $filePath = __DIR__ . '/data/' . $file;
         $context = [
@@ -61,6 +63,23 @@ class VehicleFixtures extends Fixture implements DependentFixtureInterface
             }
             $this->addReference('vehicle_' . self::$vehicleIndex, $vehicle);
             $manager->persist($vehicle);
+        }
+
+        for ($i = 1; $i <= EnterpriseFixtures::$enterpriseIndex; $i++) {
+            for ($j = 1; $j <= 10; $j++) {
+                self::$vehicleIndex++;
+                $vehicle = new Vehicle();
+                $vehicle->setBrand('Constructeur' . $faker->numberBetween(1,5));
+                $vehicle->setModel('Model' . $faker->numberBetween(1,5));
+                $vehicle->setPower($faker->numberBetween(100,300));
+                $vehicle->setLoadCapacity($faker->numberBetween(2,7));
+                $vehicle->setMilage($faker->numberBetween(1000,100000));
+                $vehicle->setStatus(self::STATUS[array_rand(self::STATUS)]);
+                $vehicle->setEnterprise($this->getReference('enterprise_' . $i));
+                $vehicle->setColor($faker->colorName);
+                $manager->persist($vehicle);
+                $this->addReference('vehicle_' . self::$vehicleIndex, $vehicle);
+            }
         }
         $manager->flush();
     }

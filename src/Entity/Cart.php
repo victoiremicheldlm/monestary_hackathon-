@@ -7,7 +7,9 @@ use App\Repository\CartRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json']
+)]
 class Cart
 {
     #[ORM\Id]

@@ -7,44 +7,59 @@ use App\Repository\DriverRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DriverRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['driver']]
+)]
 class Driver
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['user', 'driver'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $firstname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $lastname;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $phone;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $avatar;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $address;
 
     #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $zipCode;
 
     #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $country;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['user', 'driver'])]
     private $description;
 
     #[ORM\OneToOne(inversedBy: 'driver', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[Groups('driver')]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Order::class)]
+    #[Groups(['user'])]
     private $orders;
 
     public function __construct()

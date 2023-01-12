@@ -2,22 +2,30 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    formats: ['json'],
+    normalizationContext: ['groups' => ['user']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('user')]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['customer', 'user','driver', 'enterprise'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -30,12 +38,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $tickets;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Driver::class, cascade: ['persist', 'remove'])]
+    #[Groups('user')]
     private $driver;
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Enterprise::class, cascade: ['persist', 'remove'])]
+    #[Groups('user')]
     private $enterprise;
 
-    #[ORM\OneToOne(mappedBy: 'User', targetEntity: Customer::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Customer::class, cascade: ['persist', 'remove'])]
+    #[Groups('user')]
     private $customer;
 
     public function __construct()
