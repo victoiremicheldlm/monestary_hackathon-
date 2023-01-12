@@ -19,70 +19,93 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['enterprise', 'user'])]
+    #[Groups(['enterprise', 'user', 'vehicle'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['enterprise', 'user','customer'])]
+    #[Groups(['enterprise', 'user','customer', 'vehicle'])]
     private $model;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['enterprise', 'user','customer'])]
+    #[Groups(['enterprise', 'user','customer', 'vehicle'])]
     private $brand;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $energy;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups('vehicle')]
     private $power;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups('vehicle')]
     private $passenger;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups('vehicle')]
     private $load_capacity;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups('vehicle')]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $photo;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups('vehicle')]
     private $price;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups('vehicle')]
     private $milage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $location;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $status;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $numberplate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $color;
 
     #[ORM\ManyToMany(targetEntity: Customer::class, mappedBy: 'vehicles')]
+    #[Groups('vehicle')]
     private $customers;
 
     #[ORM\ManyToOne(targetEntity: Enterprise::class, inversedBy: 'vehicles')]
+    #[Groups('vehicle')]
     private $enterprise;
 
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Schedule::class)]
+    #[Groups('vehicle')]
     private $schedules;
 
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Cart::class)]
     private $carts;
 
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: CommentVehicle::class)]
+    #[Groups('vehicle')]
     private $commentVehicles;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('vehicle')]
     private $generalState;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups('vehicle')]
+    private $distance;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $longitude;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $latitude;
 
     public function __construct()
     {
@@ -213,18 +236,6 @@ class Vehicle
     public function setMilage(?int $milage): self
     {
         $this->milage = $milage;
-
-        return $this;
-    }
-
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?string $location): self
-    {
-        $this->location = $location;
 
         return $this;
     }
@@ -402,6 +413,42 @@ class Vehicle
     public function setGeneralState(?string $generalState): self
     {
         $this->generalState = $generalState;
+
+        return $this;
+    }
+
+    public function getDistance(): ?float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?float $distance): self
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

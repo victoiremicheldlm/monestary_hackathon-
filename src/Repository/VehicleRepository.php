@@ -39,6 +39,17 @@ class VehicleRepository extends ServiceEntityRepository
         }
     }
 
+//    public function vehicleDistance(float $lat, float $lng): array
+//    {
+//        $em = $this->getEntityManager();
+//        $query = $em->createQuery('SELECT *, ( 6371 * acos(cos(radians($lat))*cos(radians($lat))
+//* cos(radians($lng) - radians($lng)) + sin(radians($lat))
+//* sin(radians($lat)))) AS calculated_distance FROM settings as T HAVING calculated_distance <= (SELECT distance FROM settings WHERE sid=T.sid)
+//ORDER BY distance_calc');
+//
+//    }
+
+
 //    /**
 //     * @return Vehicle[] Returns an array of Vehicle objects
 //     */
