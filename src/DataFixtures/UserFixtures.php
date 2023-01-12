@@ -16,32 +16,6 @@ class UserFixtures extends Fixture
     public static int $userCustomerIndex = 0;
     public static int $userEnterpriseIndex = 0;
 
-    public const ADMIN = [
-            'email' => 'admin',
-            'pass' => 'motdepasse',
-            'role' => 'ROLE_ADMIN',
-    ];
-
-    public const DRIVER = [
-            'email' => 'driver',
-            'pass' => 'motdepasse',
-            'role' => 'ROLE_DRIVER'
-    ];
-
-    public const CUSTOMER = [
-            'email' => 'driver',
-            'pass' => 'motdepasse',
-            'role' => 'ROLE_'
-    ];
-
-    public const ENTERPRISE = [
-        'enterprise' => [
-            'email' => 'driver',
-            'pass' => 'motdepasse',
-            'role' => 'ROLE_DRIVER'
-        ],
-    ];
-
     public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
     {
     }

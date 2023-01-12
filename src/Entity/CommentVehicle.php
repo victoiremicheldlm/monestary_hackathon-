@@ -3,12 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CommentVehiculeRepository;
+use App\Repository\CommentVehicleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CommentVehiculeRepository::class)]
+#[ORM\Entity(repositoryClass: CommentVehicleRepository::class)]
 #[ApiResource]
-class CommentVehicule
+class CommentVehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,10 +21,10 @@ class CommentVehicule
     #[ORM\Column(type: 'integer', nullable: true)]
     private $rating;
 
-    #[ORM\ManyToOne(targetEntity: Vehicule::class, inversedBy: 'commentVehicules')]
-    private $vehicule;
+    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'commentVehicles')]
+    private $vehicle;
 
-    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'commentVehicules')]
+    #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'commentVehicles')]
     private $customer;
 
     public function getId(): ?int
@@ -56,14 +56,14 @@ class CommentVehicule
         return $this;
     }
 
-    public function getVehicule(): ?Vehicule
+    public function getVehicle(): ?Vehicle
     {
-        return $this->vehicule;
+        return $this->vehicle;
     }
 
-    public function setVehicule(?Vehicule $vehicule): self
+    public function setVehicle(?Vehicle $vehicle): self
     {
-        $this->vehicule = $vehicule;
+        $this->vehicle = $vehicle;
 
         return $this;
     }

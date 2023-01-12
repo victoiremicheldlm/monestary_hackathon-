@@ -23,8 +23,8 @@ class Schedule
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $end_at;
 
-    #[ORM\ManyToOne(targetEntity: Vehicule::class, inversedBy: 'schedules')]
-    private $vehicule;
+    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'schedules')]
+    private $vehicle;
 
     #[ORM\OneToMany(mappedBy: 'schedule', targetEntity: Order::class)]
     private $orders;
@@ -63,14 +63,14 @@ class Schedule
         return $this;
     }
 
-    public function getVehicule(): ?Vehicule
+    public function getVehicle(): ?Vehicle
     {
-        return $this->vehicule;
+        return $this->vehicle;
     }
 
-    public function setVehicule(?Vehicule $vehicule): self
+    public function setVehicle(?Vehicle $vehicle): self
     {
-        $this->vehicule = $vehicule;
+        $this->vehicle = $vehicle;
 
         return $this;
     }
