@@ -1,0 +1,11 @@
+model,brand,power,energy,load_capacity,passenger,photo,location,status,price,milage,enterprise_id,numberplate,color,general_state
+C1,Citroën,68,diesel,400,4,car_CitroënC1,null,available,25,50000,,90-MNX-22,red,used
+C3 Picasso,Citroën,120,gasoil,800,5,car_CitroënC3,null,on repair,45,55000,,90-MNX-23,grey,like new
+2008,Peugeot,68,gasoil,700,5,car_Peugeot2008,null,available,45,45000,,90-MNX-24,brown,new
+308 III,Peugeot,225,gasoil,500,4,car_peugeot308,null,unavailable,40,25000,,90-MNX-25,blue,used
+iX1 xDrive30,BMW,313,electricity,800,5,car_BMWiX1xDrive30,null,charging,60,5000,,90-MNX-26,grey,new
+XM,BMW,748,hybrid,1000,5,car_BMWXM,null,unavailable,70,2500,,90-MNX-27,blue,new
+Polo VI,Volkswagen,200,diesel,350,5,car_volkswagenpoloVI,null,available,30,60000,,90-MNX-28,white,like new
+T-Cross,Volkswagen,150,gasoil,800,5,car_volkswagentcross,null,on repair,60,45000,,90-MNX-29,gold,used
+Model S,Tesla,1020,electricity,500,5,car_TeslaModelS,null,available,70,50000,,90-MNX-30,grey,like new
+Space Star,Mitsubishi,999,gasoil,500,4,car_mitsubishispacestar,null,available,35,40000,,90-MNX-31,yellow,used
