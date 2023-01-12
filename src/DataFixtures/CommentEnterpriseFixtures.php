@@ -12,7 +12,7 @@ class CommentEnterpriseFixtures extends Fixture implements DependentFixtureInter
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        $faker = Factory::create();
 
         for ($i = 1; $i <= EnterpriseFixtures::$enterpriseIndex; $i++) {
             $number = rand(1,5);
