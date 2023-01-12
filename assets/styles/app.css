@@ -1,13 +1,4 @@
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.hello {
-  animation: App-logo-spin infinite 15s linear;
-  font-size: 15em;
-}
 
 @keyframes App-logo-spin {
   from {
