@@ -4,6 +4,9 @@ body {
   justify-content: center;
   font-family: 'Almarai', sans-serif;
   font-family: 'Poppins', sans-serif;
+  max-width: 1800px;
+  width: 100%;
+  margin: auto;
 }
 
 img {
@@ -38,8 +41,8 @@ img {
     rgba(8, 33, 102, 1) 18%,
     rgba(0, 0, 2, 1) 100%
   );
-  width: 2000px;
-  height: 800px;
+  width: 1800px;
+  height: 1000px;
   background-size: cover;
   background-repeat: no-repeat;
   justify-content: center;

@@ -1,5 +1,5 @@
 .title {
-    font-size: 8rem;
+    font-size: 7rem;
     font-family: 'Almarai', sans-serif;
   }
 
@@ -7,4 +7,91 @@
     font-size: 14rem;
     color: #ffa93c;;
   }
+
+  .color-letter {
+    color: #ffa93c;
+    font-size: 2rem;
+    font-family: 'Almarai', sans-serif;
+    font-weight: 400;
+  }
+
+.intro {
+    left: 0;
+    bottom:-200px;
+}
+
+.intro-txt {
+    font-size: 2rem;
+    font-family: 'Almarai', sans-serif;
+
+}
+
+.intro-app {
+    bottom:120px;
+    font-family: 'Almarai', sans-serif;
+    margin-left: 120px;
+    font-size: 2rem;
+
+}
+
+.intro-button {
+  top: 100px;
+  left: 100px;
+  font-family: 'Almarai', sans-serif;
+  background-color: #ffa93c;
+}
+
+.section-title {
+    margin-left: 200px;
+}
+
+.section-info {
+ font-family: 'Almarai', sans-serif;
+ font-size: 1.2rem;
+ width: 500px;
+}
+
+.section-sub-title {
+ font-family:'Almarai', sans-serif; 
+ font-weight: 700;
+}
+
+.color-info {
+ color: #ffa93c;
+}
+
+.section-image {
+    width: 600px;
+    height: auto;
+    margin-left: 20px;
+}
+
+.section-card {
+    margin-left: 200px;
+}
+
+.card-title {
+    font-family:'Almarai', sans-serif;  
+    font-weight: 700;
+    font-size: 3rem;
+    padding: 5px;
+}
+
+.color-car {
+    color: #041239;
+}
+.bg-blue {
+   background-color:#95B9FF;
+}
+.card-text {
+    font-family: 'Almarai', sans-serif;
+    padding-top: 2px;
+    font-size: 1.2rem;
+}
+
+.card-section {
+    width: 800px;
+    display: inline-block;
+    flex-wrap: nowrap;
+}
   
